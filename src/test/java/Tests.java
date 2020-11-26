@@ -1,10 +1,10 @@
-import Pages.AddAndRemoveElementsPage;
-import Pages.JSAlertsPage;
-import Pages.MainPage;
+import Pages.*;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Tests {
@@ -22,7 +22,7 @@ public class Tests {
     }
 
     @Test
-    public void addAndRemoveElementsTest(){
+    public void addAndRemoveElementsPageTest(){
         System.out.println("Step 1: going to main page");
         driver.get("http://the-internet.herokuapp.com/");
 
@@ -34,42 +34,59 @@ public class Tests {
         elementsPage.clickOnAddElementButton();
         elementsPage.clickOnAddElementButton();
 
-        int num = elementsPage.getTheNumberOfItems();
-
         System.out.println("Step 4: checking for added elements");
-        Assert.assertEquals(3,num);
+        Assert.assertEquals(3, elementsPage.getTheNumberOfItems());
 
         System.out.println("Step 5: remove some element");
         elementsPage.removeFirstElement();
 
-        num = elementsPage.getTheNumberOfItems();
-
         System.out.println("Step 6: checking for removed element");
-        Assert.assertEquals(2, num);
+        Assert.assertEquals(2, elementsPage.getTheNumberOfItems());
     }
 
     @Test
-    public void alertsTest(){
-
+    public void alertsPageTest(){
         driver.get("http://the-internet.herokuapp.com/");
 
         JSAlertsPage jsAlertsPage = mainPage.clickOnJSAllertsLink();
 
         jsAlertsPage.clickAlertButton().clickOkOnJSAlert();
 
-        String str = jsAlertsPage.getResultMessage();
-
-        Assert.assertEquals("You successfuly clicked an alert", str);
+        Assert.assertEquals("You successfuly clicked an alert", jsAlertsPage.getResultMessage());
 
         jsAlertsPage.clickJSConfirmButton().clickCancelOnJSAlert();
 
-        str = jsAlertsPage.getResultMessage();
-        Assert.assertEquals("You clicked: Cancel", str);
+        Assert.assertEquals("You clicked: Cancel", jsAlertsPage.getResultMessage());
 
-        jsAlertsPage.clickJSPromptButton().putSomeTextInJSPrompt("lmao").clickOkOnJSAlert();
+        jsAlertsPage.clickJSPromptButton().insertSomeTextInJSPrompt("lmao").clickOkOnJSAlert();
 
-        str = jsAlertsPage.getResultMessage();
-        Assert.assertEquals("You entered: lmao", str);
+        Assert.assertEquals("You entered: lmao", jsAlertsPage.getResultMessage());
+    }
+
+    @Test
+    public void iFramePageTest() throws IOException {
+        String json = "http://jsonplaceholder.typicode.com/todos?_start=0&_limit=5";
+
+        driver.get("http://the-internet.herokuapp.com/");
+
+        IFramePage iFramePage = mainPage.clickOnFramesLink().clickOnIFrameLink();
+
+        List<String> titles = iFramePage.getTitlesList(json);
+
+        iFramePage.insertAllTitles(titles);
+    }
+
+    @Test
+    public void uploadFilePageTest(){
+        driver.get("http://the-internet.herokuapp.com/");
+
+        UploadFilePage uploadFilePage = mainPage.clickOnUploadFileLink();
+
+        uploadFilePage.uploadSomeFile("C:\\img.jpg");
+
+        uploadFilePage.clickOnSubmitButton();
+
+        Assert.assertEquals("File Uploaded!", uploadFilePage.getResultText());
     }
 
     @After

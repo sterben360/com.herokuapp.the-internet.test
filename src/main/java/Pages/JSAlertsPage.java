@@ -41,7 +41,7 @@ public class JSAlertsPage {
         return this;
     }
 
-    public JSAlertsPage putSomeTextInJSPrompt(String text){
+    public JSAlertsPage insertSomeTextInJSPrompt(String text){
         driver.switchTo().alert().sendKeys(text);
         return this;
     }
