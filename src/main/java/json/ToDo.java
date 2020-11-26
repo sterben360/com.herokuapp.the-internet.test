@@ -24,6 +24,14 @@ public class ToDo {
         return id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
     @Override
     public String toString() {
         return "ToDo{" +
@@ -32,14 +40,6 @@ public class ToDo {
                 ", title='" + title + '\'' +
                 ", completed=" + completed +
                 '}';
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public boolean isCompleted() {
-        return completed;
     }
 
     @Override
