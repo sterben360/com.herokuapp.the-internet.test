@@ -1,7 +1,7 @@
 package Pages;
 
 import json.JsonReader;
-import json.Request;
+import GETRequest.Request;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -27,7 +27,7 @@ public class IFramePage {
 
     public String doGetRequest(String json) throws IOException {
         request = new Request();
-        return request.getRequest(json);
+        return request.GET(json);
     }
 
     public List<String> getTitlesList(String json) throws IOException {
