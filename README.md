@@ -7,5 +7,5 @@ WebDriver: chromedriver v87.0.4280.20 <br>
 <br>
 <br>
 # Preparation
-In order for the test to work with uploading a file from a computer, you need to transfer the folder(com.herokuapp.the-internet.test\imageForTest) to drive C. The path to be used : C:\imageForTest\img.jpg 
+In order for the test to work with uploading a file from a computer, you need to transfer the folder(com.herokuapp.the-internet.test\imageForTest) to drive C. The path to be used in test : C:\imageForTest\img.jpg 
 
