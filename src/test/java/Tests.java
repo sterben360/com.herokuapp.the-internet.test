@@ -30,9 +30,7 @@ public class Tests {
         AddAndRemoveElementsPage elementsPage = mainPage.clickOnAddAndRemoveElementsLink();
 
         System.out.println("Step 3: adding three elements");
-        elementsPage.clickOnAddElementButton();
-        elementsPage.clickOnAddElementButton();
-        elementsPage.clickOnAddElementButton();
+        elementsPage.clickOnAddElementButton().clickOnAddElementButton().clickOnAddElementButton();
 
         System.out.println("Step 4: checking for added elements");
         Assert.assertEquals(3, elementsPage.getTheNumberOfItems());
